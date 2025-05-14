@@ -10,11 +10,11 @@ export const verifyToken = async (req, res, next) => {
       .status(StatusCodes.NOT_FOUND)
       .json({ success: false, message: "Token not found" });
   }
+
   try {
     const decoded = jwt.verify(accessToken, ENV.JWT_ACCESS_TOKEN);
 
     req.user = decoded;
-    console.log(req.user);
 
     next();
   } catch (error) {

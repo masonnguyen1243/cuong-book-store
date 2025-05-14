@@ -7,6 +7,7 @@ import {
   generateRefreshToken,
 } from "../middlewares/jwt.js";
 import ms from "ms";
+import SendEmail from "../utils/sendEmail.js";
 
 const register = async (req, res) => {
   try {
@@ -44,13 +45,24 @@ const register = async (req, res) => {
 
     await newUser.save();
 
+    //Send Email
+    const verificationLink = `http://localhost:5173/account/verification?email=${newUser.email}&token=${newUser.verifyToken}`;
+    const customSubject = "Please verify your email before using our service";
+    const htmlContent = `
+      <h3>Here is your verification link</h3>
+      <h3>${verificationLink}</h3>
+      <h3>Sincerely, <br/> - Book 101 - </h3>
+    `;
+
+    await SendEmail(newUser.email, customSubject, htmlContent);
+
     return res.status(StatusCode.CREATED).json({
       success: true,
-      message: "Registration successfully!",
-      data: newUser,
+      message: "Registration successfully! Please check your email!",
     });
   } catch (error) {
     console.error("Error in register controllers");
+
     return res
       .status(StatusCode.INTERNAL_SERVER_ERROR)
       .json({ success: false, message: error.message });
