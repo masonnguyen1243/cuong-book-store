@@ -116,4 +116,20 @@ const login = async (req, res) => {
   }
 };
 
-export const authControllers = { register, login };
+const logout = async (req, res) => {
+  try {
+    res.clearCookie("accessToken");
+    res.clearCookie("refreshToken");
+
+    return res
+      .status(StatusCode.OK)
+      .json({ success: true, message: "Logged out successfully!" });
+  } catch (error) {
+    console.error("Error in logout controllers");
+    return res
+      .status(StatusCode.INTERNAL_SERVER_ERROR)
+      .json({ success: false, message: error.message });
+  }
+};
+
+export const authControllers = { register, login, logout };
