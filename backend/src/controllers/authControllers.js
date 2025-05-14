@@ -2,6 +2,11 @@ import UserModel from "../models/userModel.js";
 import StatusCode from "http-status-codes";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
+import {
+  generateAccessToken,
+  generateRefreshToken,
+} from "../middlewares/jwt.js";
+import ms from "ms";
 
 const register = async (req, res) => {
   try {
@@ -16,7 +21,7 @@ const register = async (req, res) => {
     if (user) {
       return res
         .status(StatusCode.NOT_ACCEPTABLE)
-        .json({ success: false, message: "User not found" });
+        .json({ success: false, message: "User is already exists" });
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -52,4 +57,63 @@ const register = async (req, res) => {
   }
 };
 
-export const authControllers = { register };
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if ((!email, !password)) {
+      return res
+        .status(StatusCode.NOT_FOUND)
+        .json({ success: false, message: "Fields are required!" });
+    }
+
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      return res
+        .status(StatusCode.NOT_FOUND)
+        .json({ success: false, message: "User not found" });
+    }
+
+    if (!user.isActive) {
+      return res.status(StatusCode.UNAUTHORIZED).json({
+        success: false,
+        message: "Your account is not verify, Please check your email",
+      });
+    }
+
+    const hashedPassword = await bcrypt.compare(password, user.password);
+    if (!hashedPassword) {
+      return res
+        .status(StatusCode.CONFLICT)
+        .json({ success: false, message: "Invalid Credentials" });
+    }
+
+    const accessToken = generateAccessToken(user._id, user.role);
+    const refreshToken = generateRefreshToken(user._id, user.role);
+
+    const cookieOptions = {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: ms("7 days"),
+    };
+
+    res.cookie("accessToken", accessToken, cookieOptions);
+    res.cookie("refreshToken", refreshToken, cookieOptions);
+
+    return res.status(StatusCode.OK).json({
+      success: true,
+      message: "Logged in successfully",
+      data: {
+        accessToken,
+        refreshToken,
+      },
+    });
+  } catch (error) {
+    console.error("Error in login controllers");
+    return res
+      .status(StatusCode.INTERNAL_SERVER_ERROR)
+      .json({ success: false, message: error.message });
+  }
+};
+
+export const authControllers = { register, login };
