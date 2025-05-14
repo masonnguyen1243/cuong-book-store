@@ -9,4 +9,6 @@ router.post("/login", authControllers.login);
 
 router.delete("/logout", authControllers.logout);
 
+router.put("/verify-account", authControllers.verifyAccount);
+
 export default router;

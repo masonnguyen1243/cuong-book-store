@@ -132,4 +132,50 @@ const logout = async (req, res) => {
   }
 };
 
-export const authControllers = { register, login, logout };
+const verifyAccount = async (req, res) => {
+  try {
+    const { email, token } = req.body;
+    if ((!email, !token)) {
+      return res
+        .status(StatusCode.NOT_FOUND)
+        .json({ success: false, message: "Fields are required!" });
+    }
+
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      return res
+        .status(StatusCode.NOT_FOUND)
+        .json({ success: false, message: "User not found!" });
+    }
+
+    if (user.isActive) {
+      return res.status(StatusCode.CONFLICT).json({
+        success: false,
+        message: "Your account is already active! Please login",
+      });
+    }
+
+    if (token !== user.verifyToken) {
+      return res
+        .status(StatusCode.NOT_ACCEPTABLE)
+        .json({ success: false, message: "Invalid Token!" });
+    }
+
+    user.isActive = true;
+    user.verifyToken = null;
+
+    await user.save();
+
+    return res.status(StatusCode.OK).json({
+      success: true,
+      message: "Verification successfully! Please login to enjoy our website!",
+    });
+  } catch (error) {
+    console.error("Error in verifyAccount controllers");
+    return res
+      .status(StatusCode.INTERNAL_SERVER_ERROR)
+      .json({ success: false, message: error.message });
+  }
+};
+
+export const authControllers = { register, login, logout, verifyAccount };
