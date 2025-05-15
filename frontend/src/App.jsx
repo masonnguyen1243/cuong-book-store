@@ -1,7 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import Login from "~/pages/Auth/Login";
 import Register from "~/pages/Auth/Register";
-import NotFound from "./pages/404/NotFound";
+import NotFound from "~/pages/404/NotFound";
+import UserLayouts from "~/components/Layouts/UserLayouts";
+import Home from "./pages/Home/Home";
 
 const App = () => {
   return (
@@ -12,13 +14,16 @@ const App = () => {
       </Route>
 
       {/* Public Routes */}
+      <Route path="/" element={<UserLayouts />}>
+        <Route path="/" element={<Home />} />
+      </Route>
 
       {/* Authentication */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
       {/* 404 not found page */}
-      <Route path="/404" element={<NotFound />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
