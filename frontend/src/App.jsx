@@ -9,14 +9,13 @@ const App = () => {
   return (
     <Routes>
       {/* Protected Routes */}
-      <Route>
-        <Route />
-      </Route>
 
       {/* Public Routes */}
       <Route path="/" element={<UserLayouts />}>
         <Route path="/" element={<Home />} />
       </Route>
+
+      {/* Admin Routes */}
 
       {/* Authentication */}
       <Route path="/login" element={<Login />} />

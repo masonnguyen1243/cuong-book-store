@@ -2,7 +2,7 @@ import js from "@eslint/js";
 import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
-import eslintPluginPrettier from "eslint-plugin-prettier";
+// import eslintPluginPrettier from "eslint-plugin-prettier";
 
 export default [
   { ignores: ["dist", "ignores"] },
@@ -20,7 +20,7 @@ export default [
     plugins: {
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
-      prettier: eslintPluginPrettier,
+      // prettier: eslintPluginPrettier,
     },
     rules: {
       ...js.configs.recommended.rules,
