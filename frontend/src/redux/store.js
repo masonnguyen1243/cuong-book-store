@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { authReducer } from "./slice/authSlice";
 
 //Cấu hình redux-persist
 import { combineReducers } from "redux";
@@ -12,7 +13,9 @@ const rootPersistConfig = {
   whitelist: ["auth"],
 };
 
-const reducers = combineReducers({});
+const reducers = combineReducers({
+  auth: authReducer,
+});
 
 // Thực hiện persist Reducer
 const persistedReducers = persistReducer(rootPersistConfig, reducers);

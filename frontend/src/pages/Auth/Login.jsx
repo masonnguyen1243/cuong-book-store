@@ -3,9 +3,14 @@ import { EMAIL_RULE, EMAIL_RULE_MESSAGE, PASSWORD_RULE, PASSWORD_RULE_MESSAGE } 
 import FieldErrorAlert from "~/components/Form/FieldErrorAlert";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { loginUser } from "~/redux/slice/authSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -17,9 +22,18 @@ const Login = () => {
 
   const handleLogin = (data) => {
     const { email, password } = data;
-    console.log({ email, password });
 
-    reset();
+    toast
+      .promise(dispatch(loginUser({ email, password })), {
+        pending: "Loading",
+      })
+      .then((res) => {
+        if (!res.error) {
+          navigate("/");
+          toast.success("Login successfully!");
+          reset();
+        }
+      });
   };
 
   return (
