@@ -13,6 +13,15 @@ export const loginUser = createAsyncThunk("auth/login", async (data) => {
   return response.data;
 });
 
+export const verifyAccount = createAsyncThunk("auth/verifyAccount", async (data) => {
+  const response = await authorizedAxiosInstance.put(
+    `${import.meta.env.VITE_BACKEND_URL}/api/auth/verify-account`,
+    data,
+  );
+
+  return response.data;
+});
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -25,6 +34,10 @@ const authSlice = createSlice({
       state.user = user;
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
+      const user = action.payload;
+      state.user = user;
+    });
+    builder.addCase(verifyAccount.fulfilled, (state, action) => {
       const user = action.payload;
       state.user = user;
     });

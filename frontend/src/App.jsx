@@ -3,7 +3,8 @@ import Login from "~/pages/Auth/Login";
 import Register from "~/pages/Auth/Register";
 import NotFound from "~/pages/404/NotFound";
 import UserLayouts from "~/components/Layouts/UserLayouts";
-import Home from "./pages/Home/Home";
+import Home from "~/pages/Home/Home";
+import AccountVerification from "~/pages/Auth/AccountVerification";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
       {/* Authentication */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/account/verification" element={<AccountVerification />} />
 
       {/* 404 not found page */}
       <Route path="*" element={<NotFound />} />
