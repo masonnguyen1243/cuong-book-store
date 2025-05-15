@@ -15,7 +15,7 @@ createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <ToastContainer position="bottom-right" />
+        <ToastContainer position="bottom-right" autoClose={2000} />
         <App />
       </PersistGate>
     </Provider>

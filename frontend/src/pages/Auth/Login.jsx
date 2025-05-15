@@ -1,5 +1,11 @@
 import { useForm } from "react-hook-form";
-import { EMAIL_RULE, EMAIL_RULE_MESSAGE, PASSWORD_RULE, PASSWORD_RULE_MESSAGE } from "~/utils/validators";
+import {
+  EMAIL_RULE,
+  EMAIL_RULE_MESSAGE,
+  FIELD_REQUIRED_MESSAGE,
+  PASSWORD_RULE,
+  PASSWORD_RULE_MESSAGE,
+} from "~/utils/validators";
 import FieldErrorAlert from "~/components/Form/FieldErrorAlert";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
@@ -37,8 +43,8 @@ const Login = () => {
   };
 
   return (
-    <div className="flex h-screen items-center justify-center bg-slate-200">
-      <div className="w-[550px] rounded-lg bg-white px-[72px] py-12">
+    <div className="flex h-screen items-center justify-center bg-slate-100">
+      <div className="w-[550px] rounded-lg bg-white px-[72px] py-12 shadow-lg">
         <h1 className="mx-11 mb-8 text-[28px] font-semibold">Login to your account</h1>
         <form onSubmit={handleSubmit(handleLogin)}>
           <div className="grid gap-2">
@@ -48,7 +54,7 @@ const Login = () => {
             <input
               type="email"
               {...register("email", {
-                required: true,
+                required: FIELD_REQUIRED_MESSAGE,
                 pattern: {
                   value: EMAIL_RULE,
                   message: EMAIL_RULE_MESSAGE,
@@ -67,7 +73,7 @@ const Login = () => {
             <input
               type={showPassword ? "text" : "password"}
               {...register("password", {
-                required: true,
+                required: FIELD_REQUIRED_MESSAGE,
                 pattern: {
                   value: PASSWORD_RULE,
                   message: PASSWORD_RULE_MESSAGE,
