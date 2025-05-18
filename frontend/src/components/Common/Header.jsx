@@ -18,6 +18,7 @@ const Header = () => {
         <img
           src="https://websitedemos.net/book-store-02/wp-content/uploads/sites/834/2021/04/site-logo.svg"
           alt="logo"
+          className="w-[200px] md:w-full"
         />
       </div>
 
