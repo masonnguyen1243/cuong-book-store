@@ -1,4 +1,10 @@
+import NewRelease from "~/components/Books/NewRelease";
+
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div>
+      <NewRelease />
+    </div>
+  );
 };
 export default Home;
