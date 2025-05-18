@@ -6,8 +6,6 @@ const NewRelease = () => {
   const dispatch = useDispatch();
   const { newArrivals } = useSelector((state) => state.book);
 
-  console.log(newArrivals);
-
   useEffect(() => {
     dispatch(getNewArrivals());
   }, [dispatch]);
