@@ -24,7 +24,7 @@ const Header = () => {
 
       {/* Nav */}
       <div className="hidden md:block">
-        <ul className="flex items-center justify-center gap-6">
+        <ul className="flex select-none items-center justify-center gap-6">
           <li>
             <NavLink
               to={"/"}

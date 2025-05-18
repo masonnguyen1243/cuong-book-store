@@ -1,4 +1,4 @@
 const Books = () => {
-  return <div>Books</div>;
+  return <div className="h-screen">Books</div>;
 };
 export default Books;

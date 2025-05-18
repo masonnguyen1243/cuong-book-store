@@ -15,7 +15,7 @@ const Protected = () => {
   return (
     <div>
       <Header />
-      <main className="h-screen">
+      <main>
         <Outlet />
       </main>
       <Footer />

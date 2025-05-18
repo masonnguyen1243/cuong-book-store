@@ -6,7 +6,7 @@ const UserLayouts = () => {
   return (
     <div>
       <Header />
-      <main className="h-screen">
+      <main>
         <Outlet />
       </main>
       <Footer />

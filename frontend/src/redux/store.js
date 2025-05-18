@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./slice/authSlice";
+import { bookReducer } from "./slice/bookSlice";
 
 //Cấu hình redux-persist
 import { combineReducers } from "redux";
@@ -15,6 +16,7 @@ const rootPersistConfig = {
 
 const reducers = combineReducers({
   auth: authReducer,
+  book: bookReducer,
 });
 
 // Thực hiện persist Reducer
