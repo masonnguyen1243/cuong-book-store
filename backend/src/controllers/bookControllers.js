@@ -196,6 +196,30 @@ const getBestSellersBook = async (req, res) => {
   }
 };
 
+const getSimilarBook = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const book = await BookModel.findById(id);
+    if (!book) {
+      return res
+        .status(StatusCode.NOT_FOUND)
+        .json({ success: false, message: "Book not found" });
+    }
+
+    const similarBook = await BookModel.find({
+      _id: { $ne: id },
+      category: book.category,
+    }).limit(4);
+
+    return res.status(StatusCode.OK).json({ success: true, data: similarBook });
+  } catch (error) {
+    console.error("Error in getSimilarBook controllers");
+    return res
+      .status(StatusCode.INTERNAL_SERVER_ERROR)
+      .json({ success: false, message: error.message });
+  }
+};
+
 export const bookControllers = {
   createBook,
   updateBook,
@@ -204,4 +228,5 @@ export const bookControllers = {
   getAnBook,
   getNewArrivalsBook,
   getBestSellersBook,
+  getSimilarBook,
 };

@@ -16,6 +16,8 @@ router.get("/new-arrivals", bookControllers.getNewArrivalsBook);
 
 router.get("/best-sellers", bookControllers.getBestSellersBook);
 
+router.get("/similar/:id", bookControllers.getSimilarBook);
+
 router.get("/:id", bookControllers.getAnBook);
 
 export default router;
