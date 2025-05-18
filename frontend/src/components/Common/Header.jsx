@@ -3,9 +3,11 @@ import { IoIosSearch, IoMdMenu } from "react-icons/io";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import MobileNav from "./MobileNav";
 import { useState } from "react";
+import SearchBar from "../Search/SearchBar";
 
 const Header = () => {
   const [openMobileNav, setOpenMobileNav] = useState(false);
+  const [openSearchBar, setOpenSearchBar] = useState(false);
 
   return (
     <section className="container mx-auto flex h-[104px] items-center justify-between">
@@ -66,7 +68,7 @@ const Header = () => {
       {/* Icons */}
       <div>
         <div className="flex items-center justify-center gap-4">
-          <div>
+          <div onClick={() => setOpenSearchBar(!openSearchBar)}>
             <IoIosSearch size={24} className="cursor-pointer" />
           </div>
           <div>
@@ -83,6 +85,9 @@ const Header = () => {
 
       {/* Mobile Nav */}
       <MobileNav openMobileNav={openMobileNav} setOpenMobileNav={setOpenMobileNav} />
+
+      {/* SearchBar */}
+      <SearchBar openSearchBar={openSearchBar} setOpenSearchBar={setOpenSearchBar} />
     </section>
   );
 };
