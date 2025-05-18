@@ -21,13 +21,13 @@ const NewRelease = () => {
         >
           <div className="w-1/2">
             <p className="text-main text-xs font-bold uppercase tracking-wider">New release</p>
-            <p className="text-[88px]">{book.name}</p>
+            <p className="text-[64px] md:text-[88px]">{book.name}</p>
             <p>{book.description}</p>
             <div className="mt-8 flex items-center gap-4">
-              <button className="bg-main border-main rounded-md border px-[23px] py-[15px] text-white hover:opacity-90">
+              <button className="bg-main border-main rounded-md border px-[21px] py-[13px] text-white hover:opacity-90">
                 Buy Now
               </button>
-              <button className="border-main text-main hover:bg-main rounded-md border px-[23px] py-[15px] transition-all duration-300 hover:text-white">
+              <button className="border-main text-main hover:bg-main rounded-md border px-[21px] py-[13px] transition-all duration-300 hover:text-white">
                 Read Sample
               </button>
             </div>
