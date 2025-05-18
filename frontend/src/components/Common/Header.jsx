@@ -4,10 +4,12 @@ import { FaShoppingCart, FaUser } from "react-icons/fa";
 import MobileNav from "./MobileNav";
 import { useState } from "react";
 import SearchBar from "../Search/SearchBar";
+import CartDrawer from "../Cart/CartDrawer";
 
 const Header = () => {
   const [openMobileNav, setOpenMobileNav] = useState(false);
   const [openSearchBar, setOpenSearchBar] = useState(false);
+  const [openCart, setOpenCart] = useState(false);
 
   return (
     <section className="container mx-auto flex h-[104px] items-center justify-between">
@@ -71,7 +73,7 @@ const Header = () => {
           <div onClick={() => setOpenSearchBar(!openSearchBar)}>
             <IoIosSearch size={24} className="cursor-pointer" />
           </div>
-          <div>
+          <div onClick={() => setOpenCart(!openCart)}>
             <FaShoppingCart size={24} className="cursor-pointer" />
           </div>
           <div>
@@ -88,6 +90,9 @@ const Header = () => {
 
       {/* SearchBar */}
       <SearchBar openSearchBar={openSearchBar} setOpenSearchBar={setOpenSearchBar} />
+
+      {/* Cart */}
+      <CartDrawer openCart={openCart} setOpenCart={setOpenCart} />
     </section>
   );
 };

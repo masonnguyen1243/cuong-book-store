@@ -8,7 +8,7 @@ const SearchBar = ({ openSearchBar, setOpenSearchBar }) => {
 
   return (
     <section
-      className={`flex w-full items-center justify-center transition-all duration-300 ${openSearchBar ? "absolute left-0 top-0 z-50 h-24 w-full bg-white" : "w-auto"}`}
+      className={`absolute flex w-full items-center justify-center transition-all duration-300 ${openSearchBar ? "left-0 top-0 z-50 h-24 w-full bg-white" : "w-auto"}`}
     >
       {openSearchBar && (
         <div className="relative w-72 md:w-full">
