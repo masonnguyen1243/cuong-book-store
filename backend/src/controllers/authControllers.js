@@ -116,6 +116,7 @@ const login = async (req, res) => {
       success: true,
       message: "Logged in successfully",
       data: {
+        user,
         accessToken,
         refreshToken,
       },
