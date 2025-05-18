@@ -11,7 +11,7 @@ const SearchBar = ({ openSearchBar, setOpenSearchBar }) => {
       className={`flex w-full items-center justify-center transition-all duration-300 ${openSearchBar ? "absolute left-0 top-0 z-50 h-24 w-full bg-white" : "w-auto"}`}
     >
       {openSearchBar && (
-        <div className="relative w-full">
+        <div className="relative w-72 md:w-full">
           <div className="container relative mx-auto">
             <form className="flex w-full items-center justify-center">
               <div className="w-full">
@@ -31,7 +31,10 @@ const SearchBar = ({ openSearchBar, setOpenSearchBar }) => {
               </div>
             </form>
           </div>
-          <button onClick={() => setOpenSearchBar(false)} className="absolute right-2 top-1/2 -translate-y-1/2">
+          <button
+            onClick={() => setOpenSearchBar(false)}
+            className="absolute right-2 top-1/2 hidden -translate-y-1/2 md:block"
+          >
             <IoMdClose className="h-6 w-6" />
           </button>
         </div>
