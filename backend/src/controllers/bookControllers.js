@@ -177,6 +177,25 @@ const getNewArrivalsBook = async (req, res) => {
   }
 };
 
+const getBestSellersBook = async (req, res) => {
+  try {
+    const book = await BookModel.find().sort({ rating: -1 }).limit(4);
+
+    if (!book) {
+      return res
+        .status(StatusCode.NOT_FOUND)
+        .json({ success: false, message: "Book not found" });
+    }
+
+    return res.status(StatusCode.OK).json({ success: true, data: book });
+  } catch (error) {
+    console.error("Error in getBestSellersBook controllers");
+    return res
+      .status(StatusCode.INTERNAL_SERVER_ERROR)
+      .json({ success: false, message: error.message });
+  }
+};
+
 export const bookControllers = {
   createBook,
   updateBook,
@@ -184,4 +203,5 @@ export const bookControllers = {
   getAllBooks,
   getAnBook,
   getNewArrivalsBook,
+  getBestSellersBook,
 };
