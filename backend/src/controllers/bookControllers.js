@@ -158,10 +158,30 @@ const getAnBook = async (req, res) => {
   }
 };
 
+const getNewArrivalsBook = async (req, res) => {
+  try {
+    const book = await BookModel.find().sort({ createdAt: -1 }).limit(1);
+
+    if (!book) {
+      return res
+        .status(StatusCode.NOT_FOUND)
+        .json({ success: false, message: "Book not found" });
+    }
+
+    return res.status(StatusCode.OK).json({ success: true, data: book });
+  } catch (error) {
+    console.error("Error in getNewArrivalsBook controllers");
+    return res
+      .status(StatusCode.INTERNAL_SERVER_ERROR)
+      .json({ success: false, message: error.message });
+  }
+};
+
 export const bookControllers = {
   createBook,
   updateBook,
   deleteBook,
   getAllBooks,
   getAnBook,
+  getNewArrivalsBook,
 };

@@ -12,6 +12,8 @@ router.delete("/delete/:id", verifyToken, isAdmin, bookControllers.deleteBook);
 
 router.get("/all", bookControllers.getAllBooks);
 
+router.get("/new-arrivals", bookControllers.getNewArrivalsBook);
+
 router.get("/:id", bookControllers.getAnBook);
 
 export default router;
