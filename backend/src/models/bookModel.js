@@ -17,6 +17,7 @@ const bookSchema = new mongoose.Schema(
     },
     discountPrice: {
       type: Number,
+      default: 0,
     },
     countInStock: {
       type: Number,
