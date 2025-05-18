@@ -1,14 +1,14 @@
 const Biography = () => {
   return (
-    <section className="container mx-auto mt-[200px] flex flex-col items-center justify-between border-b pb-[100px] md:flex-row">
+    <section className="container mx-auto mt-[200px] flex flex-col items-center justify-between pb-[100px] md:flex-row">
       <div className="w-1/2">
         <img
           src="https://websitedemos.net/book-store-02/wp-content/uploads/sites/834/2021/04/author-book-store-author-img.jpg"
           alt="image"
-          className="h-[553px] w-[553px] object-contain"
+          className=""
         />
       </div>
-      <div className="w-1/2 md:ml-40">
+      <div className="mt-10 w-1/2 md:ml-40 md:mt-0">
         <p className="text-main mb-8 text-xs font-bold uppercase tracking-widest">Biography</p>
         <h2 className="mb-4 text-[40px] font-medium md:text-[48px]">John Roberts</h2>
         <p className="mb-4 w-[374px] text-gray-700">
