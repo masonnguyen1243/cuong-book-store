@@ -3,9 +3,9 @@ import { FaInstagram, FaFacebook, FaYoutube, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <section className="bg-[#25262c] px-10 pb-16 pt-[104px]">
-      <div className="container mx-auto">
-        {/* Top */}
+    <section className="bg-[#25262c]">
+      {/* Top */}
+      <div className="container mx-auto px-10 pb-16 pt-[104px]">
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <div>
             <img
@@ -20,7 +20,7 @@ const Footer = () => {
                 <Link to={"/"}>Home</Link>
               </li>
               <li>
-                <Link to={"/boos"}>Books</Link>
+                <Link to={"/books"}>Books</Link>
               </li>
               <li>
                 <Link to={"/about"}>About Author</Link>
@@ -48,9 +48,11 @@ const Footer = () => {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Bottm */}
-        <div></div>
+      {/* Bottom */}
+      <div className="flex items-center justify-center py-5 text-sm text-white">
+        <p>Copyright © {new Date().getFullYear()} Cuong Book Store | Powered by Mason Nguyen</p>
       </div>
     </section>
   );
