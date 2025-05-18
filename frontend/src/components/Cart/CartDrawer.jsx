@@ -13,7 +13,7 @@ const CartDrawer = ({ openCart, setOpenCart }) => {
       </div>
 
       <div className="absolute bottom-0 mb-4 w-full p-4">
-        <button className="w-full rounded-md border border-[#5f4fca] py-4 text-[#5f4fca] transition-all duration-300 hover:bg-[#5f4fca] hover:text-white">
+        <button className="border-main text-main hover:bg-main w-full rounded-md border py-4 transition-all duration-300 hover:text-white">
           Checkout
         </button>
       </div>

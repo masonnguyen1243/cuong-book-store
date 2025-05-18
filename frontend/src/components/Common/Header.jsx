@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { IoIosSearch, IoMdMenu } from "react-icons/io";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import MobileNav from "./MobileNav";
@@ -27,7 +27,7 @@ const Header = () => {
           <li>
             <NavLink
               to={"/"}
-              className={({ isActive }) => (isActive ? "font-medium text-black" : "font-medium text-[#565a61]")}
+              className={({ isActive }) => (isActive ? "text-main font-semibold" : "font-semibold text-[#565a61]")}
             >
               Home
             </NavLink>
@@ -35,7 +35,7 @@ const Header = () => {
           <li>
             <NavLink
               to={"/books"}
-              className={({ isActive }) => (isActive ? "font-medium text-black" : "font-medium text-[#565a61]")}
+              className={({ isActive }) => (isActive ? "text-main font-semibold" : "font-semibold text-[#565a61]")}
             >
               Books
             </NavLink>
@@ -43,7 +43,7 @@ const Header = () => {
           <li>
             <NavLink
               to={"/about"}
-              className={({ isActive }) => (isActive ? "font-medium text-black" : "font-medium text-[#565a61]")}
+              className={({ isActive }) => (isActive ? "text-main font-semibold" : "font-semibold text-[#565a61]")}
             >
               About Author
             </NavLink>
@@ -51,7 +51,7 @@ const Header = () => {
           <li>
             <NavLink
               to={"/blog"}
-              className={({ isActive }) => (isActive ? "font-medium text-black" : "font-medium text-[#565a61]")}
+              className={({ isActive }) => (isActive ? "text-main font-semibold" : "font-semibold text-[#565a61]")}
             >
               Blog
             </NavLink>
@@ -59,7 +59,7 @@ const Header = () => {
           <li>
             <NavLink
               to={"/contact"}
-              className={({ isActive }) => (isActive ? "font-medium text-black" : "font-medium text-[#565a61]")}
+              className={({ isActive }) => (isActive ? "text-main font-semibold" : "font-semibold text-[#565a61]")}
             >
               Contact
             </NavLink>
@@ -71,16 +71,16 @@ const Header = () => {
       <div>
         <div className="flex items-center justify-center gap-4">
           <div onClick={() => setOpenSearchBar(!openSearchBar)}>
-            <IoIosSearch size={24} className="cursor-pointer" />
+            <IoIosSearch color="#5f4fca" size={24} className="cursor-pointer" />
           </div>
           <div onClick={() => setOpenCart(!openCart)}>
-            <FaShoppingCart size={24} className="cursor-pointer" />
+            <FaShoppingCart color="#5f4fca" size={24} className="cursor-pointer" />
           </div>
-          <div>
-            <FaUser size={24} className="cursor-pointer" />
-          </div>
+          <Link to={"/profile"}>
+            <FaUser size={24} color="#5f4fca" className="cursor-pointer" />
+          </Link>
           <div onClick={() => setOpenMobileNav(!openMobileNav)} className="block md:hidden">
-            <IoMdMenu size={24} className="cursor-pointer" />
+            <IoMdMenu size={24} color="#5f4fca" className="cursor-pointer" />
           </div>
         </div>
       </div>

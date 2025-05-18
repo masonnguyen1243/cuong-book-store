@@ -10,12 +10,15 @@ import Books from "~/pages/Books/Books";
 import About from "~/pages/About/About";
 import Blog from "~/pages/Blog/Blog";
 import Contact from "~/pages/Contact/Contact";
+import Profile from "./pages/Profile/Profile";
 
 const App = () => {
   return (
     <Routes>
       {/* Protected Routes */}
-      <Route element={<Protected />}></Route>
+      <Route element={<Protected />}>
+        <Route path="/profile" element={<Profile />} />
+      </Route>
 
       {/* Public Routes */}
       <Route path="/" element={<UserLayouts />}>
