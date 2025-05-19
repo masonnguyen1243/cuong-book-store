@@ -1,14 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentBook } from "~/redux/slice/bookSlice";
+import { getCurrentBook, getSimilarBook } from "~/redux/slice/bookSlice";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import SimilarBook from "./SimilarBook";
 
 const BookDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { currentBook } = useSelector((state) => state.book);
+  const { currentBook, similarBooks } = useSelector((state) => state.book);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -16,6 +17,8 @@ const BookDetails = () => {
 
   useEffect(() => {
     dispatch(getCurrentBook({ id }));
+
+    dispatch(getSimilarBook({ id }));
   }, [dispatch, id]);
 
   const handleQuantityChange = (action) => {
@@ -95,7 +98,9 @@ const BookDetails = () => {
           </div>
 
           {/* Bottom */}
-          <div></div>
+          <div>
+            <SimilarBook similarBooks={similarBooks} />
+          </div>
         </section>
       )}
     </div>

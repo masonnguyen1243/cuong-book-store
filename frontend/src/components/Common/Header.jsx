@@ -14,13 +14,13 @@ const Header = () => {
   return (
     <section className="container mx-auto flex h-[104px] items-center justify-between">
       {/* Logo */}
-      <div>
+      <Link to={"/"}>
         <img
           src="https://websitedemos.net/book-store-02/wp-content/uploads/sites/834/2021/04/site-logo.svg"
           alt="logo"
           className="w-[200px] md:w-full"
         />
-      </div>
+      </Link>
 
       {/* Nav */}
       <div className="hidden md:block">
@@ -28,7 +28,7 @@ const Header = () => {
           <li>
             <NavLink
               to={"/"}
-              className={({ isActive }) => (isActive ? "text-main font-semibold" : "font-semibold text-[#565a61]")}
+              className={({ isActive }) => (isActive ? "font-semibold text-main" : "font-semibold text-[#565a61]")}
             >
               Home
             </NavLink>
@@ -36,7 +36,7 @@ const Header = () => {
           <li>
             <NavLink
               to={"/books"}
-              className={({ isActive }) => (isActive ? "text-main font-semibold" : "font-semibold text-[#565a61]")}
+              className={({ isActive }) => (isActive ? "font-semibold text-main" : "font-semibold text-[#565a61]")}
             >
               Books
             </NavLink>
@@ -44,7 +44,7 @@ const Header = () => {
           <li>
             <NavLink
               to={"/about"}
-              className={({ isActive }) => (isActive ? "text-main font-semibold" : "font-semibold text-[#565a61]")}
+              className={({ isActive }) => (isActive ? "font-semibold text-main" : "font-semibold text-[#565a61]")}
             >
               About Author
             </NavLink>
@@ -52,7 +52,7 @@ const Header = () => {
           <li>
             <NavLink
               to={"/blog"}
-              className={({ isActive }) => (isActive ? "text-main font-semibold" : "font-semibold text-[#565a61]")}
+              className={({ isActive }) => (isActive ? "font-semibold text-main" : "font-semibold text-[#565a61]")}
             >
               Blog
             </NavLink>
@@ -60,7 +60,7 @@ const Header = () => {
           <li>
             <NavLink
               to={"/contact"}
-              className={({ isActive }) => (isActive ? "text-main font-semibold" : "font-semibold text-[#565a61]")}
+              className={({ isActive }) => (isActive ? "font-semibold text-main" : "font-semibold text-[#565a61]")}
             >
               Contact
             </NavLink>

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBestSellers } from "~/redux/slice/bookSlice";
+import { Link } from "react-router-dom";
 
 const BestSellers = () => {
   const dispatch = useDispatch();
@@ -24,8 +25,8 @@ const BestSellers = () => {
       </div>
       <div className="mt-12 grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
         {bestSellers?.data?.map((book, index) => (
-          <div key={index} className="">
-            <img src={book.image} alt={book.name} className="cursor-pointer rounded object-contain" />
+          <Link key={index} to={`/book/${book._id}`} className="">
+            <img src={book.image} alt={book.name} className="h-[500px] cursor-pointer rounded object-contain" />
             <p className="my-2 text-xs text-gray-500">{book.category}</p>
             <p className="font-medium">{book.name}</p>
             {book.discountPrice ? (
@@ -35,14 +36,17 @@ const BestSellers = () => {
             ) : (
               <p className="mt-1 text-sm text-[#565a61]">${book.price}</p>
             )}
-          </div>
+          </Link>
         ))}
       </div>
 
       <div className="my-[100px] flex justify-center">
-        <button className="rounded-md border border-main px-[23px] py-[15px] text-main transition-all duration-300 hover:bg-main hover:text-white">
+        <Link
+          to={`/books`}
+          className="rounded-md border border-main px-[23px] py-[15px] text-main transition-all duration-300 hover:bg-main hover:text-white"
+        >
           Shop All Book
-        </button>
+        </Link>
       </div>
     </section>
   );

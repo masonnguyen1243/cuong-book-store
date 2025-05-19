@@ -7,18 +7,14 @@ const BookGrid = ({ books }) => {
         <Link key={index} to={`/book/${book._id}`} className="block">
           <div className="">
             <div className="">
-              <img
-                src={book.image}
-                alt={book.name}
-                className="h-[600px] w-[400px] rounded object-contain md:h-[336px] md:w-[224px]"
-              />
+              <img src={book.image} alt={book.name} className="w-full" />
             </div>
             <div className="">
               <p className="my-2 text-xs text-gray-500">{book.category}</p>
               <p className="font-medium">{book.name}</p>
               {book.discountPrice ? (
                 <p>
-                  <span className="text-gray-400 line-through">${book.price}</span> ${book.discountPrice}
+                  <span className="text-sm text-gray-400 line-through">${book.price}</span> ${book.discountPrice}
                 </p>
               ) : (
                 <p className="mt-1 text-sm text-[#565a61]">${book.price}</p>

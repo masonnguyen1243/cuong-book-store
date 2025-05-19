@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import BookGrid from "./BookGrid";
+import BookGrid from "~/components/Books/BookGrid";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBooks } from "~/redux/slice/bookSlice";
 import NewRelease from "~/components/Books/NewRelease";
@@ -7,6 +7,10 @@ import NewRelease from "~/components/Books/NewRelease";
 const Books = () => {
   const dispatch = useDispatch();
   const { books } = useSelector((state) => state.book);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     dispatch(getAllBooks());

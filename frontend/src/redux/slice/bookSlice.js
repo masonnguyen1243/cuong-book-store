@@ -25,6 +25,12 @@ export const getCurrentBook = createAsyncThunk("book/getCurrentBook", async ({ i
   return response.data;
 });
 
+export const getSimilarBook = createAsyncThunk("book/getSimilarBook", async ({ id }) => {
+  const response = await authorizedAxiosInstance.get(`${import.meta.env.VITE_BACKEND_URL}/api/book/similar/${id}`);
+
+  return response.data;
+});
+
 const bookSlice = createSlice({
   name: "book",
   initialState: {
@@ -32,6 +38,7 @@ const bookSlice = createSlice({
     bestSellers: null,
     books: null,
     currentBook: null,
+    similarBooks: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -46,6 +53,9 @@ const bookSlice = createSlice({
     });
     builder.addCase(getCurrentBook.fulfilled, (state, action) => {
       state.currentBook = action.payload;
+    });
+    builder.addCase(getSimilarBook.fulfilled, (state, action) => {
+      state.similarBooks = action.payload;
     });
   },
 });
