@@ -1,4 +1,5 @@
 import { IoMdClose } from "react-icons/io";
+import CartContent from "./CartContent";
 
 const CartDrawer = ({ openCart, setOpenCart }) => {
   return (
@@ -12,8 +13,12 @@ const CartDrawer = ({ openCart, setOpenCart }) => {
         </div>
       </div>
 
+      <div>
+        <CartContent />
+      </div>
+
       <div className="absolute bottom-0 mb-4 w-full p-4">
-        <button className="border-main text-main hover:bg-main w-full rounded-md border py-4 transition-all duration-300 hover:text-white">
+        <button className="w-full rounded-md border border-main py-4 text-main transition-all duration-300 hover:bg-main hover:text-white">
           Checkout
         </button>
       </div>

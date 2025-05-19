@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentBook, getSimilarBook } from "~/redux/slice/bookSlice";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import SimilarBook from "./SimilarBook";
+import BookGrid from "./BookGrid";
 
 const BookDetails = () => {
   const [quantity, setQuantity] = useState(1);
@@ -98,8 +98,9 @@ const BookDetails = () => {
           </div>
 
           {/* Bottom */}
-          <div>
-            <SimilarBook similarBooks={similarBooks} />
+          <div className="mt-[200px]">
+            <h1 className="mb-10 mt-[200px] text-[48px] font-semibold">Related products</h1>
+            <BookGrid books={similarBooks} />
           </div>
         </section>
       )}
