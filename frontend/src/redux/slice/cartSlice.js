@@ -8,7 +8,9 @@ export const addToCart = createAsyncThunk("cart/addToCart", async (data) => {
 });
 
 export const fetchCart = createAsyncThunk("cart/fetchCart", async ({ userId }) => {
-  const response = await authorizedAxiosInstance.get(`${import.meta.env.VITE_BACKEND_URL}/api/cart/get`, { userId });
+  const response = await authorizedAxiosInstance.get(`${import.meta.env.VITE_BACKEND_URL}/api/cart/get`, {
+    params: { userId },
+  });
 
   return response.data;
 });
@@ -19,12 +21,24 @@ export const updateCart = createAsyncThunk("cart/updateCart", async (data) => {
   return response.data;
 });
 
+export const deleteCart = createAsyncThunk("cart/deleteCart", async (data) => {
+  const response = await authorizedAxiosInstance.delete(`${import.meta.env.VITE_BACKEND_URL}/api/cart/delete`, {
+    data: data,
+  });
+
+  return response.data;
+});
+
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
     cart: null,
   },
-  reducers: {},
+  reducers: {
+    clearCart: (state) => {
+      state.cart = null;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(addToCart.fulfilled, (state, action) => {
       state.cart = action.payload;
@@ -35,7 +49,12 @@ const cartSlice = createSlice({
     builder.addCase(updateCart.fulfilled, (state, action) => {
       state.cart = action.payload;
     });
+    builder.addCase(deleteCart.fulfilled, (state, action) => {
+      state.cart = action.payload;
+    });
   },
 });
+
+export const { clearCart } = cartSlice.actions;
 
 export const cartReducer = cartSlice.reducer;

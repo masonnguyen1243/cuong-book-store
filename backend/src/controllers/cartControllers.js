@@ -38,18 +38,6 @@ const createCart = async (req, res) => {
         return acc + itemPrice * item.quantity;
       }, 0);
 
-      // if (book.discountPrice !== null) {
-      //   cart.totalPrice = cart.books.reduce(
-      //     (acc, item) => acc + item.discountPrice * item.quantity,
-      //     0
-      //   );
-      // } else {
-      //   cart.totalPrice = cart.books.reduce(
-      //     (acc, item) => acc + item.price * item.quantity,
-      //     0
-      //   );
-      // }
-
       const updatedCart = await cart.save();
       return res
         .status(StatusCode.CREATED)
@@ -130,6 +118,7 @@ const updateCart = async (req, res) => {
 const deleteCart = async (req, res) => {
   try {
     const { bookId, userId } = req.body;
+
     let cart = await CartModel.findOne({ user: userId });
     if (!cart) {
       return res
@@ -143,10 +132,12 @@ const deleteCart = async (req, res) => {
     if (bookIndex > -1) {
       cart.books.splice(bookIndex, 1);
 
-      cart.totalPrice = cart.books.reduce(
-        (acc, item) => acc + item.price * item.quantity,
-        0
-      );
+      // Cập nhật totalPrice dựa trên discountPrice nếu có, ngược lại dùng price
+      cart.totalPrice = cart.books.reduce((acc, item) => {
+        const itemPrice =
+          item.discountPrice !== null ? item.discountPrice : item.price;
+        return acc + itemPrice * item.quantity;
+      }, 0);
 
       await cart.save();
       return res
@@ -167,8 +158,7 @@ const deleteCart = async (req, res) => {
 
 const getCartDetails = async (req, res) => {
   try {
-    const { userId } = req.body;
-    console.log(userId);
+    const { userId } = req.query;
 
     const cart = await CartModel.findOne({ user: userId });
     if (!cart) {

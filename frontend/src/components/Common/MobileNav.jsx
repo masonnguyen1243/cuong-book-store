@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "~/redux/slice/authSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { clearCart } from "~/redux/slice/cartSlice";
 
 const MobileNav = ({ openMobileNav, setOpenMobileNav }) => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const MobileNav = ({ openMobileNav, setOpenMobileNav }) => {
         if (!res.error) {
           navigate("/login");
           toast.success("Logged out successfully!");
+          dispatch(clearCart());
         }
       });
   };

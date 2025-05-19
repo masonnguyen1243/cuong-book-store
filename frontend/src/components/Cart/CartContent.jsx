@@ -1,11 +1,24 @@
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { IoMdClose } from "react-icons/io";
+import { deleteCart, fetchCart } from "~/redux/slice/cartSlice";
+import { toast } from "react-toastify";
 
 const CartContent = ({ cart, userId }) => {
+  console.log(cart);
+
   const dispatch = useDispatch();
 
-  useEffect(() => {}, [dispatch]);
+  const handleRemoveFromCart = (bookId) => {
+    console.log(bookId, userId);
+
+    toast.promise(dispatch(deleteCart({ bookId, userId })), { pending: "Loading" }).then((res) => {
+      if (!res.error) {
+        toast.success("Remove successfully!");
+        dispatch(fetchCart({ userId }));
+      }
+    });
+  };
+
   return (
     <div className="flex flex-col gap-5 px-4 py-4">
       {cart?.data?.books?.map((book, index) => (
@@ -27,7 +40,7 @@ const CartContent = ({ cart, userId }) => {
               </div>
             </div>
           </div>
-          <div className="cursor-pointer hover:text-red-400">
+          <div onClick={() => handleRemoveFromCart(book.bookId)} className="cursor-pointer hover:text-red-400">
             <IoMdClose className="h-6 w-6" />
           </div>
         </div>
