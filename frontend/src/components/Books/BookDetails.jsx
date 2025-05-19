@@ -4,12 +4,14 @@ import { getCurrentBook, getSimilarBook } from "~/redux/slice/bookSlice";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import BookGrid from "./BookGrid";
+import { addToCart } from "~/redux/slice/cartSlice";
 
 const BookDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
   const dispatch = useDispatch();
   const { currentBook, similarBooks } = useSelector((state) => state.book);
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -32,7 +34,28 @@ const BookDetails = () => {
   };
 
   const handleAddToCart = () => {
-    toast.success("Add to cart");
+    if (!user) {
+      toast.error("Please login to use our service");
+    }
+
+    toast
+      .promise(
+        dispatch(
+          addToCart({
+            bookId: id,
+            quantity,
+            userId: user?.data?.user?._id,
+          }),
+        ),
+        {
+          pending: "Loading",
+        },
+      )
+      .then((res) => {
+        if (!res.error) {
+          toast.success("Added to cart successfully");
+        }
+      });
   };
   return (
     <div className="mt-[60px] p-4">

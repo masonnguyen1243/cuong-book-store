@@ -5,11 +5,14 @@ import MobileNav from "./MobileNav";
 import { useState } from "react";
 import SearchBar from "../Search/SearchBar";
 import CartDrawer from "../Cart/CartDrawer";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [openMobileNav, setOpenMobileNav] = useState(false);
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openCart, setOpenCart] = useState(false);
+  const { cart } = useSelector((state) => state.cart);
+  console.log(cart?.data?.books?.length);
 
   return (
     <section className="container mx-auto flex h-[104px] items-center justify-between">
@@ -74,9 +77,18 @@ const Header = () => {
           <div onClick={() => setOpenSearchBar(!openSearchBar)}>
             <IoIosSearch color="#5f4fca" size={24} className="cursor-pointer" />
           </div>
-          <div onClick={() => setOpenCart(!openCart)}>
+          <div onClick={() => setOpenCart(!openCart)} className="relative">
             <FaShoppingCart color="#5f4fca" size={24} className="cursor-pointer" />
           </div>
+          {cart?.data?.books?.length > 0 ? (
+            <div className="absolute right-16 top-8 flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-white">
+              {cart?.data?.books?.length}
+            </div>
+          ) : (
+            <div className="absolute right-16 top-8 flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-white">
+              0
+            </div>
+          )}
           <Link to={"/profile"}>
             <FaUser size={24} color="#5f4fca" className="cursor-pointer" />
           </Link>

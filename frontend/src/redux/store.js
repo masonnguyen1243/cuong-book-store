@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./slice/authSlice";
 import { bookReducer } from "./slice/bookSlice";
+import { cartReducer } from "./slice/cartSlice";
 
 //Cấu hình redux-persist
 import { combineReducers } from "redux";
@@ -11,12 +12,13 @@ import storage from "redux-persist/lib/storage";
 const rootPersistConfig = {
   key: "root",
   storage: storage,
-  whitelist: ["auth"],
+  whitelist: ["auth", "cart"],
 };
 
 const reducers = combineReducers({
   auth: authReducer,
   book: bookReducer,
+  cart: cartReducer,
 });
 
 // Thực hiện persist Reducer
