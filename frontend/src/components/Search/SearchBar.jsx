@@ -4,8 +4,6 @@ import { IoIosSearch, IoMdClose } from "react-icons/io";
 const SearchBar = ({ openSearchBar, setOpenSearchBar }) => {
   const [searchValue, serSearchValue] = useState("");
 
-  console.log(searchValue);
-
   return (
     <section
       className={`absolute flex w-full items-center justify-center transition-all duration-300 ${openSearchBar ? "left-0 top-0 z-50 h-24 w-full bg-white" : "w-auto"}`}

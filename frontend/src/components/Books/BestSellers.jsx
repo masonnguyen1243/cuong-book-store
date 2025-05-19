@@ -40,7 +40,7 @@ const BestSellers = () => {
       </div>
 
       <div className="my-[100px] flex justify-center">
-        <button className="text-main border-main hover:bg-main rounded-md border px-[23px] py-[15px] hover:text-white">
+        <button className="rounded-md border border-main px-[23px] py-[15px] text-main transition-all duration-300 hover:bg-main hover:text-white">
           Shop All Book
         </button>
       </div>
