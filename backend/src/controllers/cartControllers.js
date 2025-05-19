@@ -26,20 +26,38 @@ const createCart = async (req, res) => {
           name: book.name,
           image: book.image,
           price: book.price,
+          discountPrice: book.discountPrice,
           quantity,
         });
       }
 
-      cart.totalPrice = cart.books.reduce(
-        (acc, item) => acc + item.price * item.quantity,
-        0
-      );
+      // Cập nhật totalPrice dựa trên discountPrice nếu có, ngược lại dùng price
+      cart.totalPrice = cart.books.reduce((acc, item) => {
+        const itemPrice =
+          item.discountPrice !== null ? item.discountPrice : item.price;
+        return acc + itemPrice * item.quantity;
+      }, 0);
+
+      // if (book.discountPrice !== null) {
+      //   cart.totalPrice = cart.books.reduce(
+      //     (acc, item) => acc + item.discountPrice * item.quantity,
+      //     0
+      //   );
+      // } else {
+      //   cart.totalPrice = cart.books.reduce(
+      //     (acc, item) => acc + item.price * item.quantity,
+      //     0
+      //   );
+      // }
 
       const updatedCart = await cart.save();
       return res
         .status(StatusCode.CREATED)
         .json({ success: true, data: updatedCart });
     } else {
+      const itemPrice =
+        book.discountPrice !== null ? book.discountPrice : book.price;
+
       const newCart = await CartModel.create({
         user: userId ? userId : undefined,
         books: [
@@ -48,10 +66,11 @@ const createCart = async (req, res) => {
             name: book.name,
             image: book.image,
             price: book.price,
+            discountPrice: book.discountPrice,
             quantity,
           },
         ],
-        totalPrice: book.price * quantity,
+        totalPrice: itemPrice * quantity, // Sử dụng discountPrice nếu có
       });
 
       return res
@@ -129,7 +148,7 @@ const deleteCart = async (req, res) => {
         0
       );
 
-      const updatedCart = await cart.save();
+      await cart.save();
       return res
         .status(StatusCode.OK)
         .json({ success: true, message: "Deleted successfully!" });
@@ -149,11 +168,13 @@ const deleteCart = async (req, res) => {
 const getCartDetails = async (req, res) => {
   try {
     const { userId } = req.body;
+    console.log(userId);
+
     const cart = await CartModel.findOne({ user: userId });
     if (!cart) {
       return res
         .status(StatusCode.NOT_FOUND)
-        .json({ success: false, message: "Book not found" });
+        .json({ success: false, message: "Cart not found" });
     }
 
     return res.status(StatusCode.OK).json({ success: true, data: cart });

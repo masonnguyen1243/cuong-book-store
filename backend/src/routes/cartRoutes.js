@@ -10,6 +10,6 @@ router.put("/update", verifyToken, cartControllers.updateCart);
 
 router.delete("/delete", verifyToken, cartControllers.deleteCart);
 
-router.get("/", verifyToken, cartControllers.getCartDetails);
+router.get("/get", verifyToken, cartControllers.getCartDetails);
 
 export default router;

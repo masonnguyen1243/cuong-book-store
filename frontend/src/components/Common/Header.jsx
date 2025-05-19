@@ -12,7 +12,6 @@ const Header = () => {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const { cart } = useSelector((state) => state.cart);
-  console.log(cart?.data?.books?.length);
 
   return (
     <section className="container mx-auto flex h-[104px] items-center justify-between">

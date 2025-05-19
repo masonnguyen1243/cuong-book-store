@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 const BestSellers = () => {
   const dispatch = useDispatch();
   const { bestSellers } = useSelector((state) => state.book);
-  console.log("🚀 ~ BestSellers ~ bestSellers:", bestSellers);
 
   useEffect(() => {
     dispatch(getBestSellers());
