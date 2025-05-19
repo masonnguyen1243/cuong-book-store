@@ -7,7 +7,6 @@ import NewRelease from "~/components/Books/NewRelease";
 const Books = () => {
   const dispatch = useDispatch();
   const { books } = useSelector((state) => state.book);
-  console.log(books);
 
   useEffect(() => {
     dispatch(getAllBooks());
@@ -24,8 +23,10 @@ const Books = () => {
 
       <NewRelease />
 
-      <p className="mb-8 mt-[200px] text-[32px] font-semibold">More Books</p>
-      <BookGrid books={books} />
+      <div className="flex flex-col items-center p-4">
+        <p className="mb-10 mt-[200px] w-full text-center text-[32px] font-semibold">More Books</p>
+        <BookGrid books={books} />
+      </div>
     </div>
   );
 };

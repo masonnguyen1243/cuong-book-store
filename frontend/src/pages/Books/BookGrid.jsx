@@ -2,12 +2,16 @@ import { Link } from "react-router-dom";
 
 const BookGrid = ({ books }) => {
   return (
-    <section className="mb-4 grid select-none grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+    <section className="mb-4 grid select-none grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4">
       {books?.data?.map((book, index) => (
-        <Link key={index} to={`/book/${book._id}`} className="w-[224px]">
+        <Link key={index} to={`/book/${book._id}`} className="block">
           <div className="">
             <div className="">
-              <img src={book.image} alt={book.name} className="h-[336px] w-full object-contain" />
+              <img
+                src={book.image}
+                alt={book.name}
+                className="h-[600px] w-[400px] rounded object-contain md:h-[336px] md:w-[224px]"
+              />
             </div>
             <div className="">
               <p className="my-2 text-xs text-gray-500">{book.category}</p>

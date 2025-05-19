@@ -10,7 +10,8 @@ import Books from "~/pages/Books/Books";
 import About from "~/pages/About/About";
 import Blog from "~/pages/Blog/Blog";
 import Contact from "~/pages/Contact/Contact";
-import Profile from "./pages/Profile/Profile";
+import Profile from "~/pages/Profile/Profile";
+import BookDetails from "~/components/Books/BookDetails";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/book/:id" element={<BookDetails />} />
       </Route>
 
       {/* Admin Routes */}
