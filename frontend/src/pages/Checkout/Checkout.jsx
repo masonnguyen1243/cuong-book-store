@@ -4,6 +4,7 @@ import { createCheckout } from "~/redux/slice/checkoutSlice";
 import PayPalButton from "./PaypalButton";
 import { useEffect, useState } from "react";
 import authorizedAxiosInstance from "~/utils/authorizedAxios";
+import { clearCart } from "~/redux/slice/cartSlice";
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -43,12 +44,12 @@ const Checkout = () => {
       if (response.payload && response.payload.data._id) {
         setCheckoutId(response.payload.data._id);
       }
-
-      console.log(response.payload.data._id);
     }
   };
 
   const handlePaymentSuccess = async (details) => {
+    console.log(details);
+
     try {
       await authorizedAxiosInstance.put(`${import.meta.env.VITE_BACKEND_URL}/api/checkout/${checkoutId}/pay`, {
         paymentStatus: "Paid",
@@ -66,6 +67,7 @@ const Checkout = () => {
       await authorizedAxiosInstance.post(`${import.meta.env.VITE_BACKEND_URL}/api/checkout/${checkoutId}/finalize`);
 
       navigate("/order-confirmation");
+      dispatch(clearCart());
     } catch (error) {
       console.error(error);
     }

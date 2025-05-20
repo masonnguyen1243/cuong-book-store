@@ -25,10 +25,12 @@ const CartDrawer = ({ openCart, setOpenCart }) => {
         <p className="flex h-screen items-center justify-center">Your cart is empty.</p>
       )}
 
-      <div className="absolute bottom-[100px] flex w-full items-center justify-between border-y p-4">
-        <p>Subtotal: </p>
-        <p className="text-center">${cart?.data?.totalPrice}</p>
-      </div>
+      {cart && cart?.data?.books?.length > 0 && (
+        <div className="absolute bottom-[100px] flex w-full items-center justify-between border-y p-4">
+          <p>Subtotal: </p>
+          <p className="text-center">${cart?.data?.totalPrice}</p>
+        </div>
+      )}
 
       <div className="absolute bottom-0 mb-4 w-full p-4">
         {cart && cart?.data?.books?.length > 0 && (
