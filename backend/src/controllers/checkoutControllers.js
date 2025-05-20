@@ -1,5 +1,7 @@
 import CheckoutModel from "../models/checkoutModel.js";
 import StatusCode from "http-status-codes";
+import OrderModel from "../models/orderModel.js";
+import CartModel from "../models/cartModel.js";
 
 const createCheckout = async (req, res) => {
   try {
@@ -81,6 +83,37 @@ const finalizeCheckout = async (req, res) => {
     }
 
     if (checkout.isPaid && !checkout.isFinalized) {
+      const finalOrder = await OrderModel.create({
+        user: checkout.user,
+        orderItems: checkout.checkoutItems,
+        shippingAddress: checkout.shippingAddress,
+        paymentMethod: checkout.paymentMethod,
+        totalPrice: checkout.totalPrice,
+        isPaid: true,
+        paidAt: checkout.paidAt,
+        isDelivered: false,
+        paymentStatus: "Paid",
+        paymentDetails: checkout.paymentDetails,
+      });
+
+      checkout.isFinalized = true;
+      checkout.finalizedAt = Date.now();
+
+      await checkout.save();
+
+      await CartModel.findByIdAndDelete({ user: checkout.user });
+
+      return res
+        .status(StatusCode.OK)
+        .json({ success: true, data: finalOrder });
+    } else if (checkout.isFinalized) {
+      return res
+        .status(StatusCode.NOT_ACCEPTABLE)
+        .json({ success: true, message: "Checkout already finalized" });
+    } else {
+      return res
+        .status(StatusCode.NOT_ACCEPTABLE)
+        .json({ message: "Checkout is not paid" });
     }
   } catch (error) {
     console.error("Error in finalizeCheckout controllers");
