@@ -14,6 +14,8 @@ import Profile from "~/pages/Profile/Profile";
 import BookDetails from "~/components/Books/BookDetails";
 import Checkout from "~/pages/Checkout/Checkout";
 import OrderConfirmation from "~/pages/Order/OrderConfirmation";
+import OrderDetails from "~/pages/Order/OrderDetails";
+import MyOrders from "~/pages/Order/MyOrders";
 
 const App = () => {
   return (
@@ -23,6 +25,8 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/order-confirmation" element={<OrderConfirmation />} />
+        <Route path={`/order/:id`} element={<OrderDetails />} />
+        <Route path="my-orders" element={<MyOrders />} />
       </Route>
 
       {/* Public Routes */}

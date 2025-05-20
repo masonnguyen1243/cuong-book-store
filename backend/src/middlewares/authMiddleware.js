@@ -7,7 +7,7 @@ export const verifyToken = async (req, res, next) => {
 
   if (!accessToken) {
     return res
-      .status(StatusCodes.NOT_FOUND)
+      .status(StatusCodes.UNAUTHORIZED)
       .json({ success: false, message: "Token not found" });
   }
 
@@ -20,7 +20,7 @@ export const verifyToken = async (req, res, next) => {
   } catch (error) {
     if (error?.message?.includes("jwt expired")) {
       return res
-        .status(StatusCodes.BAD_REQUEST)
+        .status(StatusCodes.UNAUTHORIZED)
         .json({ message: "Token expired" });
     }
 

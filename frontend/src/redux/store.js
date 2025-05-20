@@ -3,6 +3,7 @@ import { authReducer } from "./slice/authSlice";
 import { bookReducer } from "./slice/bookSlice";
 import { cartReducer } from "./slice/cartSlice";
 import { checkoutReducer } from "./slice/checkoutSlice";
+import { orderReducer } from "./slice/orderSlice";
 
 //Cấu hình redux-persist
 import { combineReducers } from "redux";
@@ -21,6 +22,7 @@ const reducers = combineReducers({
   book: bookReducer,
   cart: cartReducer,
   checkout: checkoutReducer,
+  orders: orderReducer,
 });
 
 // Thực hiện persist Reducer

@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { logoutUser } from "~/redux/slice/authSlice";
 import { useNavigate } from "react-router-dom";
 import { clearCart } from "~/redux/slice/cartSlice";
+import MyOrders from "../Order/MyOrders";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -37,7 +38,9 @@ const Profile = () => {
           </div>
 
           {/* Right */}
-          <div className="w-full md:w-2/3 lg:w-3/4">{/* <MyOrders /> */}</div>
+          <div className="w-full md:w-2/3 lg:w-3/4">
+            <MyOrders />
+          </div>
         </div>
       </div>
     </div>
