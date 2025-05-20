@@ -10,8 +10,6 @@ const Protected = () => {
     return <Navigate to={"/login"} replace={true} />;
   }
 
-  console.log(user);
-
   return (
     <div>
       <Header />

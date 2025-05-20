@@ -1,6 +1,7 @@
 import { IoMdClose } from "react-icons/io";
 import CartContent from "./CartContent";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const CartDrawer = ({ openCart, setOpenCart }) => {
   const { user } = useSelector((state) => state.auth);
@@ -31,9 +32,12 @@ const CartDrawer = ({ openCart, setOpenCart }) => {
 
       <div className="absolute bottom-0 mb-4 w-full p-4">
         {cart && cart?.data?.books?.length > 0 && (
-          <button className="w-full rounded-md border border-main py-4 text-main transition-all duration-300 hover:bg-main hover:text-white">
+          <Link
+            to={"/checkout"}
+            className="flex w-full justify-center rounded-md border border-main py-4 text-main transition-all duration-300 hover:bg-main hover:text-white"
+          >
             Checkout
-          </button>
+          </Link>
         )}
       </div>
     </section>

@@ -4,13 +4,9 @@ import { deleteCart, fetchCart } from "~/redux/slice/cartSlice";
 import { toast } from "react-toastify";
 
 const CartContent = ({ cart, userId }) => {
-  console.log(cart);
-
   const dispatch = useDispatch();
 
   const handleRemoveFromCart = (bookId) => {
-    console.log(bookId, userId);
-
     toast.promise(dispatch(deleteCart({ bookId, userId })), { pending: "Loading" }).then((res) => {
       if (!res.error) {
         toast.success("Remove successfully!");

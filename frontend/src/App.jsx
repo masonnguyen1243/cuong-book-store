@@ -12,6 +12,8 @@ import Blog from "~/pages/Blog/Blog";
 import Contact from "~/pages/Contact/Contact";
 import Profile from "~/pages/Profile/Profile";
 import BookDetails from "~/components/Books/BookDetails";
+import Checkout from "~/pages/Checkout/Checkout";
+import OrderConfirmation from "~/pages/Order/OrderConfirmation";
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
       {/* Protected Routes */}
       <Route element={<Protected />}>
         <Route path="/profile" element={<Profile />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/order-confirmation" element={<OrderConfirmation />} />
       </Route>
 
       {/* Public Routes */}

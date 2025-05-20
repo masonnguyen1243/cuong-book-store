@@ -101,7 +101,9 @@ const finalizeCheckout = async (req, res) => {
 
       await checkout.save();
 
-      await CartModel.findByIdAndDelete({ user: checkout.user });
+      await CartModel.findOneAndDelete({
+        user: checkout.user,
+      });
 
       return res
         .status(StatusCode.OK)
